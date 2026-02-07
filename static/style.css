@@ -255,6 +255,35 @@ button:active {
     font-weight: 500;
 }
 
+.fight-status {
+    flex-shrink: 0;
+}
+
+.badge-unavailable {
+    color: #ff4444;
+    font-weight: 700;
+    font-size: 0.85em;
+    letter-spacing: 0.3px;
+}
+
+.badge-available {
+    color: #4CAF50;
+    font-weight: 600;
+    font-size: 0.85em;
+}
+
+.fight-unavailable {
+    border-left-color: #ff4444;
+    opacity: 0.6;
+    cursor: default;
+}
+
+.fight-unavailable:hover {
+    border-color: #ff4444;
+    transform: none;
+    box-shadow: none;
+}
+
 .error-message {
     background: #ff4444;
     color: white;

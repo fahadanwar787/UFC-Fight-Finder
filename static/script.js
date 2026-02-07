@@ -127,7 +127,7 @@ async function loadFighterFights(fighter) {
     hideError();
     
     try {
-        const response = await fetch(`/api/fights?url=${encodeURIComponent(fighter.url)}`);
+        const response = await fetch(`/api/fights?url=${encodeURIComponent(fighter.url)}&name=${encodeURIComponent(fighter.name)}`);
         const data = await response.json();
         
         hideLoading();
@@ -151,17 +151,28 @@ function displayFights(fights, fighter) {
     
     fights.forEach((fight) => {
         const card = document.createElement('div');
-        card.className = 'fight-card';
+        const available = fight.paramount_available;
+        card.className = 'fight-card' + (available ? '' : ' fight-unavailable');
+        
+        const availabilityBadge = available
+            ? '<span class="badge-available">▶ Watch on Paramount+</span>'
+            : '<span class="badge-unavailable">Not Available</span>';
+        
         card.innerHTML = `
             <div class="fight-header">
                 <div class="fight-event">${fight.event}</div>
-                <div class="fight-date">${fight.date}</div>
+                <div class="fight-status">${availabilityBadge}</div>
             </div>
             <div class="fight-details">
                 <div class="fight-opponent">vs ${fight.opponent}</div>
+                <div class="fight-date">${fight.date}</div>
             </div>
         `;
-        card.addEventListener('click', () => openParamountLink(fight, fighter.name));
+        
+        if (available) {
+            card.addEventListener('click', () => openParamountLink(fight, fighter.name));
+        }
+        
         fightList.appendChild(card);
     });
     

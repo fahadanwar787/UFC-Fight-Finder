@@ -276,11 +276,17 @@ def search():
 def get_fights():
     """API endpoint to get fights for a specific fighter"""
     fighter_url = request.args.get('url', '')
+    fighter_name = request.args.get('name', '')
     
     if not fighter_url:
         return jsonify({'error': 'Please provide a fighter URL'}), 400
     
     fights = ufc_search.get_fighter_fights(fighter_url)
+    
+    # Check Paramount+ availability for each fight
+    for fight in fights:
+        url = paramount.find_match(fighter_name, fight['opponent'], fight['event'])
+        fight['paramount_available'] = url is not None
     
     return jsonify({
         'fights': fights,
