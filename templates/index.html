@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFC Fight Finder - Search & Watch</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🥊 UFC Fight Finder</h1>
+            <p class="subtitle">Search for UFC fighters and watch their historic battles</p>
+        </header>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-box">
+                <div class="search-input-container">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Start typing a fighter's name..."
+                        autocomplete="off"
+                    >
+                    <div id="autocompleteResults" class="autocomplete-results hidden"></div>
+                </div>
+            </div>
+            <div id="loading" class="loading hidden">Searching...</div>
+        </div>
+
+        <!-- Fighter Results Section -->
+        <div id="fighterResults" class="results-section hidden">
+            <h2>Select a Fighter</h2>
+            <div id="fighterList" class="fighter-list"></div>
+        </div>
+
+        <!-- Fight History Section -->
+        <div id="fightHistory" class="results-section hidden">
+            <div class="back-button-container">
+                <button id="backBtn" class="back-btn">← Back to Search</button>
+            </div>
+            <h2 id="fighterName"></h2>
+            <p class="info-text">Click on any fight to watch it on Paramount+</p>
+            <div id="fightList" class="fight-list"></div>
+        </div>
+
+        <!-- Error Message -->
+        <div id="errorMessage" class="error-message hidden"></div>
+    </div>
+
+    <footer>
+        <p>Data from UFC Stats | Streaming via Paramount+</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
